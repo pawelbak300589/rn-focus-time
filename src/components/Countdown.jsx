@@ -14,7 +14,7 @@ const Countdown = ({
   onProgress
 }) => {
   const interval = React.useRef(null);
-  const [milliseconds, setMilliseconds] = useState(minutesToMilliseconds(minutes));
+  const [milliseconds, setMilliseconds] = useState(null);
   const minute = Math.floor(milliseconds / 1000 / 60) % 60;
   const seconds = Math.floor(milliseconds / 1000) % 60;
 
@@ -27,7 +27,11 @@ const Countdown = ({
       const timeLeft = time - 1000;
       return timeLeft
     })
-  }
+  };
+
+  useEffect(() => {
+    setMilliseconds(minutesToMilliseconds(minutes));
+  }, [minutes]);
 
   useEffect(() => {
     if (isPaused) {
@@ -38,8 +42,7 @@ const Countdown = ({
     onProgress(milliseconds / minutesToMilliseconds(minutes));
 
     return () => clearInterval(interval.current);
-  }, [isPaused, milliseconds])
-
+  }, [isPaused, milliseconds]);
 
   return (
     <View>

@@ -19,6 +19,8 @@ const Timer = ({ focusSubject }) => {
 
   const changeTime = (min) => {
     setMinutes(min);
+    setProgress(1);
+    setIsStarted(false);
   };
 
   return (
@@ -67,6 +69,7 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     flex: 0.3,
+    flexDirection: 'row',
     padding: 15,
     justifyContent: 'center',
     alignItems: 'center'
