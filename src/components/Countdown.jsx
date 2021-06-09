@@ -11,7 +11,8 @@ const formatTime = (time) => time < 10 ? `0${time}` : time;
 const Countdown = ({
   minutes = 1,
   isPaused,
-  onProgress
+  onProgress,
+  onEnd
 }) => {
   const interval = React.useRef(null);
   const [milliseconds, setMilliseconds] = useState(null);
@@ -21,7 +22,8 @@ const Countdown = ({
   const countDown = () => {
     setMilliseconds((time) => {
       if (time === 0) {
-        // do more stuff here
+        clearInterval(interval.current);
+        // onEnd(); // it was throwing warnings: "Warning: Cannot update a component from inside the function body of a different component."
         return time;
       }
       const timeLeft = time - 1000;
@@ -40,6 +42,9 @@ const Countdown = ({
     }
     interval.current = setInterval(countDown, 1000);
     onProgress(milliseconds / minutesToMilliseconds(minutes));
+    if (milliseconds === 0) {
+      onEnd();
+    }
 
     return () => clearInterval(interval.current);
   }, [isPaused, milliseconds]);
