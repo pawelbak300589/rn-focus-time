@@ -6,8 +6,10 @@ import Countdown from '../../components/Countdown';
 import RoundedButton from '../../components/RoundedButton';
 import { colors } from '../../utils/colors';
 import { spacing } from '../../utils/sizes';
+import Timing from './Timing';
 
 const Timer = ({ focusSubject }) => {
+  const [minutes, setMinutes] = useState(0.1);
   const [isStarted, setIsStarted] = useState(false);
   const [progress, setProgress] = useState(1);
 
@@ -15,10 +17,14 @@ const Timer = ({ focusSubject }) => {
     setProgress(progress);
   };
 
+  const changeTime = (min) => {
+    setMinutes(min);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.countdown}>
-        <Countdown isPaused={!isStarted} onProgress={onProgress} />
+        <Countdown minutes={minutes} isPaused={!isStarted} onProgress={onProgress} />
       </View>
       <View style={{ paddingTop: spacing.xxl }}>
         <Text style={styles.title}>Focusing on:</Text>
@@ -26,6 +32,9 @@ const Timer = ({ focusSubject }) => {
       </View>
       <View style={{ paddingTop: spacing.sm }}>
         <ProgressBar progress={progress} color="#5E84E2" style={{ height: 10 }} />
+      </View>
+      <View style={styles.buttonWrapper}>
+        <Timing onChangeTime={changeTime} />
       </View>
       <View style={styles.buttonWrapper}>
         {isStarted ? (
