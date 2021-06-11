@@ -15,12 +15,6 @@ export default function App() {
   const [focusSubject, setFocusSubject] = useState(null);
   const [focusHistory, setFocusHistory] = useState([]);
 
-  // useEffect(() => {
-  //   if (focusSubject) {
-  //     setFocusHistory([...focusHistory, focusSubject]);
-  //   }
-  // }, [focusSubject]);
-
   const addFocusHistorySubjectWithState = (subject, state) => {
     setFocusHistory([...focusHistory, { subject, status }]);
   }
