@@ -21,7 +21,7 @@ export default function App() {
   };
 
   const onClear = () => {
-    // TODO:
+    setFocusHistory([]);
   };
 
   return (
