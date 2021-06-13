@@ -23,7 +23,6 @@ const Countdown = ({
     setMilliseconds((time) => {
       if (time === 0) {
         clearInterval(interval.current);
-        // onEnd(); // it was throwing warnings: "Warning: Cannot update a component from inside the function body of a different component."
         return time;
       }
       const timeLeft = time - 1000;
@@ -37,6 +36,9 @@ const Countdown = ({
 
   useEffect(() => {
     onProgress(milliseconds / minutesToMilliseconds(minutes));
+    if (milliseconds === 0) {
+      onEnd();
+    }
   }, [milliseconds]);
 
   useEffect(() => {
@@ -45,10 +47,6 @@ const Countdown = ({
       return;
     }
     interval.current = setInterval(countDown, 1000);
-    if (milliseconds === 0) {
-      onEnd();
-    }
-
     return () => clearInterval(interval.current);
   }, [isPaused, milliseconds]);
 
