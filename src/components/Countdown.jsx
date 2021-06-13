@@ -36,12 +36,15 @@ const Countdown = ({
   }, [minutes]);
 
   useEffect(() => {
+    onProgress(milliseconds / minutesToMilliseconds(minutes));
+  }, [milliseconds]);
+
+  useEffect(() => {
     if (isPaused) {
       if (interval.current) clearInterval(interval.current);
       return;
     }
     interval.current = setInterval(countDown, 1000);
-    onProgress(milliseconds / minutesToMilliseconds(minutes));
     if (milliseconds === 0) {
       onEnd();
     }
