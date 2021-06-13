@@ -5,7 +5,7 @@ import RoundedButton from '../../components/RoundedButton';
 
 const Timing = ({ onChangeTime }) => {
   return (
-    <React.Fragment>
+    <>
       <View style={styles.timingButton}>
         <RoundedButton size={75} title="10" onPress={() => onChangeTime(10)} />
       </View>
@@ -15,7 +15,7 @@ const Timing = ({ onChangeTime }) => {
       <View style={styles.timingButton}>
         <RoundedButton size={75} title="20" onPress={() => onChangeTime(20)} />
       </View>
-    </React.Fragment>
+    </>
   );
 };
 
